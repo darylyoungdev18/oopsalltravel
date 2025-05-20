@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up </title>
+    <link rel="icon" type="image/svg" href="images\dytravels_logoedit.svg" sizes="16x16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+
+<div class="feature-container">
+    <div class="internal-hero-container gradient">
+        <div class="content">
+            <h1 class="internal-title">
+                Register
+            </h1>
+            <div class="internal-sub">Sign up to be a part of the global community.</div>
+        </div>
+    </div>
+  <div class="sign-up-container">
+    <h1>Create Your Account</h1>
+    <form class="sign-up" id="signUpForm" action="/users/register/" method="POST">
+      <div class="username-side">
+        <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+
+      </div>
+      <div class="email-side">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>  
+      </div>
+      <div class="password-side">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>  
+      </div> 
+      <div class="phone-side">
+        <label for="phone">Phone:</label>
+        <input type="Phone" id="phone" name="phone">        
+      </div>
+
+      <div class="sign-up-button">
+      <button type="submit">Sign Up</button>
+      </div>
+    </form>
+  </div>
+  <%- include ('partials/footer.ejs') %>
+<script type="module" src="/module/navlogic.js"></script>
+
+<!--<script type="module" src="module\signup.js"></script> -->
+</body>
+</html>

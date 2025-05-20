@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg" href="images\dytravels_logoedit.svg" sizes="16x16">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include ('partials/navbar.ejs') %>
+  <div class="feature-container">
+    <div class="hero-container">
+        <div class="feature-image">
+            <img class="header-image" src="images\homepage_header.jpg">
+        </div>
+        <div class="feature-content">
+            <h1 class="Title">
+                Welcome To DUY Travel
+            </h1>
+            <div class="subtitle-area">
+                The World is small, </br> taking it all in makes it bigger
+            </div>
+            
+        </div>
+    </div>  
+  <div class="landing-container internal-container">
+
+    <h1>Welcome, <%= username %>!</h1>
+
+<h2 style="margin-bottom:2rem;">Last Three Blogs Posted by Users</h2>
+<ul class="blog-preview fade-in-content">
+  <% if (lastThreeBlogs && lastThreeBlogs.length > 0) { %>
+    <% lastThreeBlogs.forEach(blog => { %>
+      <li  class="preview-div">
+        <h3><a href="/blogs/<%= blog.Blog_ID %>"><%= blog.Blog_Title %></a></h3>
+        
+        <div>
+          <% if (blog.Blog_IMG_SRC) { %>
+            <img src="<%= blog.Blog_IMG_SRC %>" class="preview-img" alt="Blog Image" style="max-width: 200px;">
+          <% } %>
+        </div> 
+        <p>by <%= blog.User_Account_Name %></p>
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li>No recent blogs found.</li>
+  <% } %>
+</ul>
+
+<h2 style="margin-bottom:2rem;">Last Blog You Liked</h2>
+<ul class="blog-preview fade-in-content">
+  <% if (lastLikedBlogs && lastLikedBlogs.length > 0) { %>
+    <% lastLikedBlogs.forEach(blog => { %>
+      <li class="preview-div">
+        <h3><a href="/blogs/<%= blog.Blog_ID %>"><%= blog.Blog_Title %></a></h3>
+        <div>
+          <% if (blog.Blog_IMG_SRC) { %>
+            <img src="<%= blog.Blog_IMG_SRC %>" class="preview-img" alt="Blog Image" style="max-width: 200px;">
+          <% } %>
+        </div>
+        <p>by <%= blog.User_Account_Name %></p>
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li>You haven't liked any blogs yet.</li>
+  <% } %>
+</ul>
+
+<p>
+  <a href="/blogs/create">Create a New Blog Entry</a>
+</p>
+</div>
+
+  
+  <%- include ('partials/footer.ejs') %>
+
+  <script type="module" src="/module/navlogic.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!-- views/blogs.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Blogs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+    <div class="internal-hero-container gradient">
+      <div class="content">
+          <h1 class="internal-title">
+              Blogs
+          </h1>
+          <div class="internal-sub">See what people experience in their travels </div>
+      </div>
+  </div>
+    <div class="internal-container">
+        <div class="first-content">
+            <h1 class="intro-content">
+                All Blogs
+            </h1>
+        </div>
+        <div class="filter-section">
+            <form id="filterForm" action="/blogs" method="GET">
+                <label for="locationFilter">Filter by Location:</label>
+                <select name="location" id="locationFilter" onchange="document.getElementById('filterForm').submit();">
+                  <option value="">All Locations</option>
+                  <% locations.forEach(function(location) { %>
+                    <option value="<%= location.Location_ID %>" <%= (location.Location_ID == query.location) ? 'selected' : '' %>>
+                      <%= location.Location_Place %>
+                    </option>
+                  <% }); %>
+                </select>
+              </form>
+        </div>
+        
+        <div class="blog-section">
+            <div class="all-blogs">
+                <ul class="blog-preview fade-in-content">
+                    <% blogs.forEach(function(blog) { %>
+                        <li class="preview-div">
+                            
+                                <% if (blog.Blog_IMG_SRC) { %>
+                                  <img src="<%= blog.Blog_IMG_SRC %>" class="preview-img" alt="Blog Image" style="max-width: 200px;">
+                                <% } %>
+                                <h3 class="preview-title"><a href="/blogs/<%= blog.Blog_ID %>"><%= blog.Blog_Title %></a></h3>
+                                <div class="preview-info"> 
+                                <p>Location: <%= blog.Location.Location_Place %></p>
+                                <p>By: <%= blog.User_Account.User_Account_Name %></p>
+                                    
+                                <% if (blog.Is_Video_Blog) { %>
+                                  
+                                  <p><strong>Video Blog - Click to view.</strong></p>
+                                <% } else if (blog.Blog_Details) { %>
+                                                                       
+                            
+                            <% 
+                              const words = blog.Blog_Details.split(' ');
+                              const excerpt = words.slice(0, 10).join(' ');
+                            %>
+                            <p><%= excerpt %>...</p>
+                            
+                          <% } %>
+                            <div>
+                                <p>Likes: <span id="like-count-<%= blog.Blog_ID %>"><%= blog.likeCount %></span></p>
+                                <% if (userLoggedIn) { %>
+                                <% if (blog.isLiked) { %>
+                                    <button class="like-button unlike" data-blog-id="<%= blog.Blog_ID %>">Unlike</button>
+                                <% } else { %>
+                                    <button class="like-button like" data-blog-id="<%= blog.Blog_ID %>">Like</button>
+                                <% } %>
+                                <% } %>
+                            </div>
+                          
+                  
+                       
+                    <% }); %>
+                    </div>
+                </div>
+                       
+                        
+            </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <%- include ('partials/footer.ejs') %>
+    <script type="module" src="/module/navlogic.js"></script>
+    <script type="module" src="module\blogentry.js"></script>
+ 
+   <!-- AJAX script for like/unlike -->
+   <script>
+     document.addEventListener('DOMContentLoaded', function () {
+      // Get all like buttons
+      const likeButtons = document.querySelectorAll('.like-button');
+
+      likeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          const blogId = this.dataset.blogId;
+          const isLike = this.classList.contains('like');
+          const url = isLike ? '/blogs/like/' + blogId : '/blogs/unlike/' + blogId;
+          const button = this;
+
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8'
+            }
+          })
+          .then(response => {
+            if (!response.ok) {
+              return response.json().then(error => { throw error; });
+            }
+            return response.json();
+          })
+          .then(data => {
+            document.getElementById('like-count-' + blogId).textContent = data.likeCount;
+            if (isLike) {
+              button.classList.remove('like');
+              button.classList.add('unlike');
+              button.textContent = 'Unlike';
+            } else {
+              button.classList.remove('unlike');
+              button.classList.add('like');
+              button.textContent = 'Like';
+            }
+          })
+          .catch(error => {
+            alert(error.message || 'An error occurred.');
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

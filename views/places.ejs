@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See DUY Places</title>
+    <link rel="icon" type="image/svg" href="images\dytravels_logoedit.svg" sizes="16x16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+
+    <div class="internal-hero-container gradient">
+        <div class="content">
+            <h1 class="internal-title">
+                Places
+            </h1>
+            <div class="internal-sub">Get a glimpse of what the world have to offer</div>
+        </div>
+    </div>
+    <div class="internal-container">
+        <div class="first-content">
+            <div id="search-section">
+            <form class="search-form fade-in-content">
+                <label for="search-key">Select a City:</label>
+                <input id="search-key" spellcheck="true" type="text" placeholder="Where would you like to see">
+            </form>
+            <div class="search-dropdown">
+
+            </div>
+            </div>
+            <div class="search-results">
+                <div class="result-name-spot">
+                    <h2 id="result-name">
+
+                    </h2>
+                </div>
+                <div class="result-image-spot">
+                   
+                </div>
+                <div class="result-familiarity-spot">
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="image-slider fade-in-content" id="imageSlider">
+
+        </div>
+
+    </div>    
+
+    
+    <%- include ('partials/footer.ejs') %>
+    <script type="module" src="/module/navlogic.js"></script>
+    <script type="module" src="/module/locations.js"></script>
+</body>
+</html>

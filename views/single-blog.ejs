@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= blog.Blog_Title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+    <div class="internal-hero-container gradient">
+      <div class="content">
+          <h1 class="internal-title">
+            <%= blog.Blog_Title %>
+          </h1>
+          
+      </div>
+  </div>
+  <div class="internal-container single-blog">
+  <p>By: <%= blog.User_Account.User_Account_Name %></p>
+  <p>Location: <%= blog.Location.Location_Place %> </p>
+  <div>
+    <% if (blog.Blog_IMG_SRC) { %>
+      <img src="<%= blog.Blog_IMG_SRC %>" alt="Blog Image" style="max-width: 600px;">
+    <% } %>
+  </div>
+  <div>
+    <% if (blog.Is_Video_Blog) { %>
+      <% if (blog.Blog_Video_SRC) { %>
+        <video  controls>
+          <source src="<%= blog.Blog_Video_SRC %>" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      <% } else { %>
+        <p>No video available.</p>
+      <% } %>
+    <% } else { %>
+      <p><%= blog.Blog_Details %></p>
+    <% } %>
+  </div>
+
+ <!-- Like section -->
+ <div>
+    <p>Likes: <span id="like-count"><%= likeCount %></span></p>
+    <% if (userLoggedIn) { %>
+      <% if (isLiked) { %>
+        <button id="like-button" class="unlike" data-blog-id="<%= blog.Blog_ID %>">Unlike</button>
+      <% } else { %>
+        <button id="like-button" class="like" data-blog-id="<%= blog.Blog_ID %>">Like</button>
+      <% } %>
+    <% } %>
+  </div>
+
+  <!-- Optional: Link back to all blogs -->
+  <a href="/blogs">Back to Blogs</a>
+  </div>
+
+  <%- include ('partials/footer.ejs') %>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const likeButton = document.getElementById('like-button');
+
+      if (likeButton) {
+        likeButton.addEventListener('click', function() {
+          const blogId = this.dataset.blogId;
+          const isLike = this.classList.contains('like');
+          const url = isLike ? '/blogs/like/' + blogId : '/blogs/unlike/' + blogId;
+          const button = this;
+
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8'
+            }
+          })
+          .then(response => {
+            if (!response.ok) {
+              return response.json().then(error => { throw error; });
+            }
+            return response.json();
+          })
+          .then(data => {
+            document.getElementById('like-count').textContent = data.likeCount;
+            if (isLike) {
+              button.classList.remove('like');
+              button.classList.add('unlike');
+              button.textContent = 'Unlike';
+            } else {
+              button.classList.remove('unlike');
+              button.classList.add('like');
+              button.textContent = 'Like';
+            }
+          })
+          .catch(error => {
+            alert(error.message || 'An error occurred.');
+          });
+        });
+      }
+    });
+  </script>
+<script type="module" src="/module/navlogic.js"></script>
+</body>
+</html>

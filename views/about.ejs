@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About DUY Travel </title>
+    <link rel="icon" type="image/svg" href="images\dytravels_logoedit.svg" sizes="16x16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+
+    
+    <div class="feature-container">
+        <div class="hero-container">
+            <div class="feature-image">
+                <img class="header-image" src="images\homepage_header.jpg">
+            </div>
+            <div class="feature-content">
+                <h1 class="Title">
+                    About DUY Travel
+                </h1>
+                <div class="subtitle-area">
+                    The World is small, </br> sharing experiences makes it bigger
+                </div>
+                <div class="cta-area">
+                    <a class="cta-btn" href="/blogs">
+                        Read Blogs
+                    </a>
+                    <a class="cta-btn" href="/places">
+                        Search Places
+                    </a>
+                </div>
+            </div>
+        </div>
+    <div class="main-container">
+        <div class="first-content">
+            <div class="left-text">
+                <h2 class="main-container-title">
+                    The World I Saw
+                </h2>
+                <p class="mid-content">
+                    I use to read about the rest of the world in small books that was easily held withng my hands.
+                     Growing up in Brooklyn, New York the world seemed so small. Since I left the city, I have
+                     traveled to over 30 cities in over 10 countries. The world gets bigger with every
+                     new location, moments experience, and lesson learn on the journey.
+                </p>
+                <p class="mid-content">
+                    I'm Daryl Young and this is the DUY Travel site. This site will provide the blog entries from
+                    the places users have been all over the world. I hope you will
+                    be able to grab something from this and
+                </p>
+                <p class="grow">
+                    Grow Your World
+                </p>
+            </div>
+        </div>
+        <div class="right-text">
+            <div class="image-area">
+                <div class="image-spot">
+                    <img class="masonry-image" src="images\porto_portugal beach.jpg">
+                </div>
+                <div class="image-spot smaller-photo">
+                    <img class="masonry-image" src="images\italy-venice-canal.jpg">
+                </div>
+                <div class="image-spot">
+                    <img class="masonry-image" src="images\Acropolis_Greece.jpg">
+                </div>
+                <div class="image-spot">
+                    <img class="masonry-image" src="images\usa-rockefeller.jpg">
+                </div>
+                <div class="image-spot">
+                    <img class="masonry-image" src="images\Lisbon_Plaza_Portugal.jpg">
+                </div>
+                <div class="image-spot">
+                    <img class="masonry-image" src="images\Azores_Portugal.jpg">
+                </div>
+                <div class="image-spot">
+                    <img class="masonry-image" src="images\Trier_Germany.jpg">
+                </div>
+                <div class="image-spot .smaller-photo">
+                    <img width='375' class="masonry-image" src="images\dominicanrepublic-punta-cana.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="footer">
+        <div class="content">
+            <div class="footer-contact">
+                <div class="contact-info">
+                    <ul class="footer-content">
+                        <li>
+
+                            <a href="/someotherlink.com" class="footer-link"> <img class="footer-logos" src="images\black-instagram-icon.svg"></a> 
+                        </li>
+                        <li>
+                            <a href="/someotherlink.com" class="footer-link"><img class="footer-logos" src="images\ico_linkedIn.svg"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <nav class="footer-nav">
+                <ul class="footer-content">
+                    <li>
+                        <a href="/" class="footer-link"> Home</a>
+                    </li>
+                    <li>
+                        <a href="/Blogs.html" class="footer-link"> Blogs</a>
+                    </li>
+                    <li>
+                        <a href="/places.html" class="footer-link">Places </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+    <%- include ('partials/footer.ejs') %>
+    <script type="module" src="module\masonry.js"></script>
+    <script type="module" src="/module/navlogic.js"></script>
+</body>
+</html>

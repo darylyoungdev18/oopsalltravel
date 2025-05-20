@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To DUY Travel </title>
+    <link rel="icon" type="image/svg" href="images\dytravels_logoedit.svg" sizes="16x16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+
+<div class="feature-container">
+    <div class="hero-container">
+        <div class="feature-image">
+            <img class="header-image" src="images\homepage_header.jpg">
+        </div>
+        <div class="feature-content">
+            <% if (username) { %>
+  <h1 class="title">Welcome, <%= username %>!</h1>
+<% } else { %>
+  <h1 class="title">Welcome, Guest!</h1>
+<% } %>
+            <div class="subtitle-area">
+                The World is small, </br> taking it all in makes it bigger
+            </div>
+        </div>
+    </div>
+  <div class="landing-container">
+    <h1>Welcome to TravelSite</h1>
+    <p>Please choose an option to continue:</p>
+    <button id="guestButton">Continue as Guest</button>
+    <button id="signUpButton">Sign Up</button>
+    <button id="loginButton">Log In</button>
+  </div>
+  <%- include ('partials/footer.ejs') %>
+
+  <script>
+    document.getElementById('guestButton').addEventListener('click', function() {
+      window.location.href = '/blogs'; // Continue as guest
+    });
+    document.getElementById('signUpButton').addEventListener('click', function() {
+      window.location.href = '/sign-up'; // Redirect to sign-up page
+    });
+    document.getElementById('loginButton').addEventListener('click', function() {
+      window.location.href = '/login'; // Redirect to login page
+    });
+  </script>
+  <script type="module" src="/module/navlogic.js"></script>
+</body>
+</html>

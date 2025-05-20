@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Blog Entry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+
+    <div class="internal-hero-container gradient">
+      <div class="content">
+          <h1 class="internal-title">
+              Edit Blog
+          </h1>
+          <div class="internal-sub">Make your changes below.</div>
+      </div>
+  </div>
+
+  <div class="internal-container edit-section">
+
+    <form action="/blogs/edit/<%= blog.Blog_ID %>?_method=PUT" method="POST" enctype="multipart/form-data">
+      <!-- Blog Title -->
+       <div class="blog-title-input">
+      <label for="blog-title">Blog Title:</label>
+      <input type="text" id="blog-title" name="title" value="<%= blog.Blog_Title %>" required>
+      </div>
+
+      <!-- Is Video Blog -->
+      <div class="video-input">
+      <label for="is-video-blog">Is this a video blog?</label>
+      <input type="checkbox" id="is-video-blog" name="isVideoBlog" onclick="toggleVideoInput()" <%= blog.Is_Video_Blog ? 'checked' : '' %>>
+      </div>
+      <div class="blog-details-input">
+      <!-- Blog Details -->
+      <div id="detailsInput" style="<%= blog.Is_Video_Blog ? 'display:none;' : '' %>">
+        <label for="blog-details">Blog Details:</label>
+        <textarea id="blog-details" name="details" rows="4"><%= blog.Blog_Details %></textarea>
+      </div>
+      </div>
+      <div class="video-upload-input">
+      <!-- Video Upload -->
+      <div id="videoInput" style="<%= blog.Is_Video_Blog ? '' : 'display:none;' %>">
+        <label for="videoFile">Upload New Video File:</label>
+        <input type="file" id="videoFile" name="videoFile" accept="video/*">
+        <% if (blog.Blog_Video_SRC) { %>
+          <p>Current Video: <%= blog.Blog_Video_SRC %></p>
+        <% } %>
+      </div>
+    </div>
+    <div class="image-upload-input">
+      <!-- Image Upload -->
+      <label for="blogImage">Upload New Blog Image:</label>
+      <input type="file" id="blogImage" name="blogImage" accept="image/*">
+      <% if (blog.Blog_IMG_SRC) { %>
+        <p>Current Image:</p>
+        <img src="<%= blog.Blog_IMG_SRC %>" alt="Blog Image" style="max-width:200px;">
+      <% } %>
+    </div>
+    <div class="location-input">
+              <!-- Location_Place Input -->
+  <label for="locationPlace">Location:</label>
+  <input type="text" id="locationPlace" name="locationPlace" autocomplete="off" required>
+  <ul id="autocomplete-list" class="autocomplete-items"></ul>
+</div>
+ 
+      <!-- Submit Button -->
+      <button type="submit">Update Blog</button>
+    </form>
+  </div>
+  <%- include ('partials/footer.ejs') %>
+
+  <script>
+    function toggleVideoInput() {
+      const videoInput = document.getElementById('videoInput');
+      const detailsInput = document.getElementById('detailsInput');
+      const isVideoBlog = document.getElementById('is-video-blog').checked;
+      if (isVideoBlog) {
+        videoInput.style.display = 'block';
+        detailsInput.style.display = 'none';
+      } else {
+        videoInput.style.display = 'none';
+        detailsInput.style.display = 'block';
+      }
+    }
+  </script>
+  <script type="module" src="/module/navlogic.js"></script>
+     <script type="module" src="/module/autocomplete.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Ignore node modules
+/node_modules
+# Ignore environment files
+.env
+.env.backup
+.env.*.backup
+
+# Ignore IDE and system files
+/.vscode
+
+# Ignore logs
+backend\config\database.js
+
+# Ignore imaage files
+public\userAssets

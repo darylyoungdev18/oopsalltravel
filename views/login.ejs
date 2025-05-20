@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+    <link rel="icon" type="image/svg" href="images\dytravels_logoedit.svg" sizes="16x16">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js" integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+    
+
+    <div class="internal-hero-container gradient">
+        <div class="content">
+            <h1 class="internal-title">
+                Login
+            </h1>
+            <div class="internal-sub">Sign in to see your blogs. </div>
+        </div>
+    </div>
+    <div class="feature-container">
+       
+    <div class="login-container">
+  <h1>Login</h1>
+  <form id="loginForm" action="/users/login" method="POST">
+    <div class="username-side">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>    
+    </div>
+    <div class="password-side">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+  </form>
+  <% 
+  if (errorMessage) { 
+    %>
+    <p class="error"><%= errorMessage %></p>
+  <% } %>
+</div>
+
+<%- include ('partials/footer.ejs') %>
+</body>
+<script type="module" src="/module/navlogic.js"></script>
+</html>

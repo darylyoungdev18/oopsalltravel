@@ -856,6 +856,7 @@ ul.blog-preview {
   }
   .preview-div .preview-img{
     width:80%;
+    margin:1.5rem auto .5rem;
   }
   .blog-layout .blog-content-layout{
     width:100%;
